@@ -2,8 +2,8 @@ export class Project {
   constructor(name) {
     this.name = name;
     this.taskList = [];
+    listProjects.push(this);
   }
-
   addTask(task) {
     this.taskList.push(task);
   }
@@ -17,6 +17,7 @@ export const listProjects = [];
 
 // making default project
 export const defaultProject = new Project("defaultProject");
-listProjects.push(defaultProject);
-console.log(listProjects);
 
+export function findProject(name) {
+  return listProjects.find((project) => project.name === name);
+}

@@ -13,10 +13,30 @@ export class Task {
     return this.status ? "Done" : "Todo";
   }
 
+  changeStatusToggle() {
+    this.status = !this.status;
+  }
+
+  update({ name, description, dueDate, priority }) {
+    this.name = name;
+    this.description = description;
+    this.dueDate = dueDate;
+    this.priority = priority;
+  }
+
+  isDueToday() {
+    return Boolean(this.dueDate) && isToday(this.dueDate);
+  }
+
+  isDueThisWeek() {
+    return Boolean(this.dueDate) && isThisWeek(this.dueDate);
+  }
+
   getDueInfo() {
+    if (!this.dueDate) return "No due date";
+    if (isToday(this.dueDate)) return "Today";
     if (isPast(this.dueDate)) return "Overdue";
-    else if (isToday(this.dueDate)) return "Today";
-    else if (isThisWeek(this.dueDate)) return "This Week";
+    if (isThisWeek(this.dueDate)) return "This Week";
     return "Upcoming";
   }
 }
