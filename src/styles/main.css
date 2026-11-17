@@ -1,0 +1,82 @@
+:root {
+  --pip-bg: #030803;
+  --pip-panel: #061006;
+  --pip-green: #3dff6e;
+  --pip-bright: #b6ffca;
+  --pip-dim: #238c44;
+  --pip-faint: rgba(61, 255, 110, 0.16);
+  --pip-red: #ff5a5a;
+  --pip-glow: 0 0 6px rgba(61, 255, 110, 0.35);
+  --pip-font: "Courier New", "Lucida Console", monospace;
+}
+
+html {
+  background: var(--pip-bg);
+}
+
+body {
+  min-height: 100vh;
+  background:
+    radial-gradient(ellipse at 50% 0%, rgba(22, 70, 32, 0.35), transparent 60%),
+    var(--pip-bg);
+  color: var(--pip-green);
+  font-family: var(--pip-font);
+  font-size: 16px;
+  letter-spacing: 0.02em;
+  text-shadow: 0 0 2px rgba(61, 255, 110, 0.25);
+}
+
+/* CRT scanlines */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 999;
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 0.22) 0,
+    rgba(0, 0, 0, 0.22) 1px,
+    transparent 1px,
+    transparent 3px
+  );
+  opacity: 0.5;
+}
+
+::selection {
+  background: var(--pip-green);
+  color: var(--pip-bg);
+  text-shadow: none;
+}
+
+button {
+  appearance: none;
+  font-family: inherit;
+  color: var(--pip-green);
+  background: transparent;
+  border: 1px solid var(--pip-green);
+  border-radius: 0;
+  padding: 0.45rem 0.9rem;
+  font-size: 0.78rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: box-shadow 120ms;
+}
+
+button:hover {
+  background: var(--pip-green);
+  color: var(--pip-bg);
+  box-shadow: var(--pip-glow);
+  text-shadow: none;
+}
+
+button:active {
+  transform: translateY(1px);
+}
+
+button:focus-visible {
+  outline: 1px solid var(--pip-bright);
+  outline-offset: 2px;
+  box-shadow: var(--pip-glow);
+}

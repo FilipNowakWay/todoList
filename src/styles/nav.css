@@ -1,0 +1,90 @@
+#nav {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem 1rem;
+  padding: 0.75rem clamp(1rem, 4vw, 2.5rem) 1rem;
+  border-bottom: 1px solid var(--pip-dim);
+  background: rgba(3, 8, 3, 0.94);
+}
+
+#nav::before {
+  content: "PIP-OS // TASK TERMINAL";
+  flex: 0 0 100%;
+  padding-bottom: 0.55rem;
+  border-bottom: 1px dashed var(--pip-faint);
+  color: var(--pip-dim);
+  font-size: 0.6rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+}
+
+#defaultNav,
+#projectsNav {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+#projectsNav {
+  margin-left: auto;
+}
+
+#defaultNav .Btn {
+  padding: 0.35rem 0.55rem;
+  border-color: var(--pip-dim);
+  color: var(--pip-dim);
+}
+
+#defaultNav .Btn::before {
+  content: "[";
+  margin-right: 0.35em;
+  color: var(--pip-dim);
+}
+
+#defaultNav .Btn::after {
+  content: "]";
+  margin-left: 0.35em;
+  color: var(--pip-dim);
+}
+
+#defaultNav .Btn:hover {
+  border-color: var(--pip-green);
+  color: var(--pip-bg);
+}
+
+#defaultNav .Btn:hover::before,
+#defaultNav .Btn:hover::after {
+  color: var(--pip-bg);
+}
+
+.projectBtn {
+  padding: 0.3rem 0.6rem;
+  border-color: var(--pip-dim);
+  color: var(--pip-dim);
+  font-size: 0.68rem;
+  letter-spacing: 0.1em;
+}
+
+.projectBtn::before {
+  content: "> ";
+}
+
+.projectBtn:hover,
+.projectBtn.active {
+  background: var(--pip-green);
+  border-color: var(--pip-green);
+  color: var(--pip-bg);
+  box-shadow: var(--pip-glow);
+  text-shadow: none;
+}
+
+@media (max-width: 760px) {
+  #projectsNav {
+    margin-left: 0;
+  }
+}

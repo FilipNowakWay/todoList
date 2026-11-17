@@ -1,0 +1,69 @@
+#taskList {
+  border-top: 1px solid var(--pip-faint);
+}
+
+.taskRow {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.7rem 0.25rem;
+  border-bottom: 1px dashed var(--pip-faint);
+}
+
+.taskRow:hover {
+  background: rgba(61, 255, 110, 0.045);
+}
+
+.taskRow p {
+  flex: 1 1 auto;
+  min-width: 0;
+  font-size: 0.84rem;
+  letter-spacing: 0.03em;
+}
+
+.taskRow.done p {
+  color: var(--pip-dim);
+  text-decoration: line-through;
+  text-decoration-thickness: 1px;
+}
+
+.taskRow button {
+  flex: 0 0 auto;
+  padding: 0.26rem 0.55rem;
+  font-size: 0.64rem;
+  letter-spacing: 0.08em;
+}
+
+.taskDoneBtn {
+  min-width: 4.6rem;
+}
+
+.taskRow.done .taskDoneBtn {
+  background: var(--pip-green);
+  border-color: var(--pip-green);
+  color: var(--pip-bg);
+  box-shadow: none;
+}
+
+.deleteBtn:hover,
+.deleteBtn:focus-visible {
+  background: var(--pip-red);
+  border-color: var(--pip-red);
+  color: var(--pip-bg);
+  box-shadow: 0 0 6px rgba(255, 90, 90, 0.45);
+}
+
+@media (max-width: 640px) {
+  .taskRow {
+    flex-wrap: wrap;
+    gap: 0.4rem;
+  }
+
+  .taskRow p {
+    flex-basis: 100%;
+  }
+
+  .taskRow button {
+    flex: 1 1 auto;
+  }
+}
