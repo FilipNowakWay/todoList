@@ -7,8 +7,7 @@ export function saveTasks(project) {
 export function loadTasks(projectName) {
   const raw = localStorage.getItem(projectName);
   if (!raw) return [];
-
-  try {
+  else {
     const parsed = JSON.parse(raw);
     if (!Array.isArray(parsed)) return [];
     return parsed.map(
@@ -21,7 +20,7 @@ export function loadTasks(projectName) {
           task.status,
         ),
     );
-  } catch {
-    return [];
   }
 }
+
+

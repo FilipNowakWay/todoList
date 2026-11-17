@@ -1,6 +1,8 @@
 import { loadTasks } from "./storage.js";
+import { listProjects } from "./project.js";
 
 const mainContainer = document.querySelector("#container");
+const projectsNav = document.querySelector("#projectsNav");
 
 export function displayTaskForm() {
   mainContainer.innerHTML = "";
@@ -66,10 +68,10 @@ export function displayTaskForm() {
     prioritySelect,
   );
 
-  const submitBtn = document.createElement("button");
-  submitBtn.textContent = "Add Task";
-  submitBtn.id = "submitBtn";
-  mainContainer.append(formH1, form, submitBtn);
+  const taskAddBtn = document.createElement("button");
+  taskAddBtn.textContent = "Add Task";
+  taskAddBtn.id = "taskAddBtn";
+  mainContainer.append(formH1, form, taskAddBtn);
   return mainContainer;
 }
 
@@ -90,9 +92,19 @@ export function displayTasks(project) {
     newTaskElement.dataset.index = index;
 
     const taskText = document.createElement("p");
-    taskText.textContent = `${task.name} ${task.dueDate} ${task.priority} ${task.getStatus()} ${task.getDueInfo()}`;
-    newTaskElement.append(taskText);
+    taskText.textContent = `${task.name} ${task.dueDate} ${task.priority} ${task.getDueInfo()}`;
 
+    const taskDoneBtn = document.createElement("button");
+    taskDoneBtn.textContent = `${task.getStatus()}`;
+    taskDoneBtn.id = "taskDoneBtn";
+    taskDoneBtn.dataset.index = index;
+
+    const editBtn = document.createElement("button");
+    editBtn.textContent = "Edit";
+    editBtn.id = "editBtn";
+    editBtn.dataset.index = index;
+
+    newTaskElement.append(taskText, taskDoneBtn, editBtn);
     taskList.appendChild(newTaskElement);
   });
 
@@ -100,13 +112,45 @@ export function displayTasks(project) {
 }
 
 export function displayProjectForm() {
-  //   <form id="formAddProject" class="hidden">
-  //     <h2>Add Project</h2>
-  //
-  //     <label for="projectName">Name:</label>
-  //     <input type="text" id="projectName" name="projectName" required>
-  //
-  //     <button type="submit" id="addProject" class="btn">Add Project</button>
-  //   </form>
   mainContainer.innerHTML = "";
+
+  const projectFormContainer = document.createElement("div");
+
+  const projectFormHeader = document.createElement("h1");
+  projectFormHeader.textContent = "Add Project";
+  projectFormHeader.id = "projectFormHeader";
+
+  const inputProjectNameLabel = document.createElement("label");
+  inputProjectNameLabel.textContent = "Project Name: ";
+  inputProjectNameLabel.setAttribute("for", "inputProjectName");
+  const inputProjectName = document.createElement("input");
+  inputProjectName.id = "inputProjectName";
+  const inputProjectAddBtn = document.createElement("button");
+  inputProjectAddBtn.textContent = "Add Project";
+  inputProjectAddBtn.id = "inputProjectAddBtn";
+
+  projectFormContainer.append(
+    projectFormHeader,
+    inputProjectNameLabel,
+    inputProjectName,
+    inputProjectAddBtn,
+  );
+
+  mainContainer.append(projectFormContainer);
 }
+
+export function displayProjects() {
+  projectsNav.innerHTML = "";
+
+  listProjects.forEach((project) => {
+    const buttonForProject = document.createElement("button");
+    if (project.name == "defaultProject") return;
+    else {
+      buttonForProject.textContent = `${project.name}`;
+      projectsNav.appendChild(buttonForProject);
+    }
+  });
+}
+
+export function displayTaskToday() {}
+export function displayTaskThisWeek() {}
