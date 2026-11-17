@@ -1,5 +1,8 @@
 import "./styles/reset.css";
 import "./styles/main.css";
+import "./styles/nav.css";
+import "./styles/display.css";
+import "./styles/tasks.css";
 import "./styles/forms.css";
 import {
   displayTaskForm,
