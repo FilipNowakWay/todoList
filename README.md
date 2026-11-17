@@ -1,8 +1,20 @@
-# Vanilla JS Boilerplate
+# Todo List
 
-Minimal Webpack 5 starter for plain JavaScript projects. No frameworks, no opinions — just a dev server, a production build, and a clean `src/` to grow into.
+A vanilla JavaScript todo app with projects, task editing, due-date views, and a Fallout-inspired terminal interface. Built with ES modules, Webpack 5, and `date-fns`.
 
-## Quick start
+**Live demo:** <https://filipnowakway.github.io/todoList/>
+
+![Todo List running in a browser](docs/screenshot.png)
+
+## Features
+
+- **Projects** — create projects, switch between them from the nav, and file tasks under any project.
+- **Task management** — name, description, due date, priority; toggle done, edit, or delete.
+- **Views** — Home, per-project lists, Today, and This Week.
+- **Persistence** — projects and tasks are stored in `localStorage` and restored on reload.
+- **Terminal UI** — phosphor-green palette, CRT scanlines, monospace type, and a responsive layout. Styles are split by element in `src/styles/`.
+
+## Getting started
 
 ```bash
 npm install
@@ -13,65 +25,42 @@ The dev server runs at <http://localhost:8080>.
 
 ## Scripts
 
-| Command         | Description                                          |
-| --------------- | ---------------------------------------------------- |
-| `npm run dev`   | Start the dev server with inline source maps         |
-| `npm run build` | Build minified files into `dist/`                    |
-| `npm run deploy`| Build and publish `dist/` to GitHub Pages         |
+| Command          | Description                                 |
+| ---------------- | ------------------------------------------- |
+| `npm run dev`    | Start the dev server with inline source maps |
+| `npm run build`  | Build minified files into `dist/`           |
+| `npm run deploy` | Build and publish `dist/` to GitHub Pages   |
 
 ## Project structure
 
 ```text
 src/
-├── assets/        images, fonts, and other static files
-├── components/    reusable UI components
-├── modules/       JavaScript modules
-├── styles/        CSS files
-├── index.js       application entry point
-└── template.html  HTML template used by HtmlWebpackPlugin
+├── index.js         application entry point and event wiring
+├── template.html    HTML shell used by HtmlWebpackPlugin
+├── modules/
+│   ├── display.js   DOM rendering and views
+│   ├── project.js   Project model and project list
+│   ├── storage.js   localStorage load/save helpers
+│   └── task.js      Task model and due-date logic
+└── styles/
+    ├── reset.css
+    ├── main.css     theme tokens, base elements, scanlines
+    ├── nav.css
+    ├── display.css
+    ├── tasks.css
+    └── forms.css
 ```
 
-Styles and assets imported from JavaScript are bundled automatically:
+## Data storage
 
-```js
-import "./styles/main.css";
-```
+Everything lives in the browser's `localStorage`:
 
-## Removing `.gitkeep` files
+| Key              | Value                              |
+| ---------------- | ---------------------------------- |
+| `todo.projects`  | JSON array of project names        |
+| `<project name>` | JSON array of that project's tasks |
 
-The empty folders ship with `.gitkeep` files so git tracks them. Once the folders contain real files, delete the placeholders:
-
-```bash
-find src -name ".gitkeep" -type f -delete
-```
-
-## Optional: html-loader
-
-Ask yourself: **does `template.html` reference files directly?**
-
-- A CSS file via `<link rel="stylesheet" href="./styles/main.css">`?
-- An image via `<img src="./assets/images/photo.png">`?
-
-If **yes**, install html-loader so Webpack resolves and bundles those references:
-
-```bash
-npm install --save-dev html-loader
-```
-
-Then add it to `webpack.config.js`:
-
-```js
-module: {
-  rules: [
-    {
-      test: /\.html$/i,
-      loader: "html-loader",
-    },
-  ],
-}
-```
-
-If **no** — keep importing CSS and assets from JavaScript, and you don't need html-loader.
+The built-in `defaultProject` is shown as **Home** and does not appear in the project list.
 
 ## Requirements
 
